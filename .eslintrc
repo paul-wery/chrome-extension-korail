@@ -1,32 +1,44 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
+  "root": true,
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "next/core-web-vitals"
   ],
-  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    "tsconfigRootDir": "./",
+    "project": ["./tsconfig.json"]
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "rules": {
-    "react/react-in-jsx-scope": "off"
-  },
+
+  // "env": {
+  //   "browser": true,
+  //   "es6": true,
+  //   "node": true
+  // },
+  // "extends": [
+  //   "eslint:recommended",
+  //   "plugin:react/recommended",
+  //   "plugin:@typescript-eslint/recommended",
+  //   "plugin:prettier/recommended"
+  // ],
+  // "parser": "@typescript-eslint/parser",
+  // "parserOptions": {
+  //   "ecmaFeatures": {
+  //     "jsx": true
+  //   },
+  //   "ecmaVersion": "latest",
+  //   "sourceType": "module"
+  // },
+  // "plugins": ["react", "@typescript-eslint"],
+  // "settings": {
+  //   "react": {
+  //     "version": "detect"
+  //   }
+  // },
+  // "rules": {
+  //   "react/react-in-jsx-scope": "off"
+  // },
   "globals": {
     "chrome": "readonly"
   },

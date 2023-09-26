@@ -5,3 +5,8 @@
 .content-view-style-may-be-not-working {
   font-size: 30px;
 }
+
+#chrome-extension-boilerplate-react-vite-content-view-root {
+  position: relative;
+  z-index: 100;
+}
