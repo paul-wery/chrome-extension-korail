@@ -2,11 +2,12 @@ import { createRoot } from 'react-dom/client';
 import App from '@src/pages/content/components/app';
 import refreshOnUpdate from 'virtual:reload-on-update-in-view';
 import { attachTwindStyle } from '@src/shared/style/twind';
+import { ROOT_ID } from '@root/src/lib/constants';
 
 refreshOnUpdate('pages/content');
 
 const root = document.createElement('div');
-root.id = 'chrome-extension-boilerplate-react-vite-content-view-root';
+root.id = ROOT_ID;
 
 document.body.append(root);
 

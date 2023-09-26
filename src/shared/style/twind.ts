@@ -1,6 +1,6 @@
-import { twind, cssom, observe } from "@twind/core";
-import "construct-style-sheets-polyfill";
-import config from "@root/twind.config";
+import { twind, cssom, observe } from '@twind/core';
+import 'construct-style-sheets-polyfill';
+import config from '@root/twind.config';
 
 export function attachTwindStyle<T extends { adoptedStyleSheets: any }>(
   observedElement: Element,
