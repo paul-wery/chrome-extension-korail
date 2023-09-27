@@ -33,7 +33,9 @@ const SelectInput: React.FC<Props> = ({
             onChange={(e) => setValue(e.target.value)}
           >
             {options.map((option) => (
-              <option selected={option.key === selected}>{option.value}</option>
+              <option selected={option.key === selected} value={option.key}>
+                {option.value}
+              </option>
             ))}
           </select>
         </div>

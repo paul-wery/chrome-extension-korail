@@ -1,19 +1,46 @@
-import { useForm } from 'react-hook-form';
-import TextField from '../core/ui/TextField';
-import { BookingModel } from '@root/src/types/booking-model';
+import {
+  countriesOptions,
+  trainStationsOptions,
+} from '@root/src/lib/constants';
 import { useBuildFormRegister } from '@root/src/lib/hooks/buildFormRegister';
-import Button from '../core/ui/Button';
-import DateInput from '../DateInput';
-import SimpleInputContainer from '../SimpleInputContainer';
+import { selectors } from '@root/src/lib/utils/getElement';
+import { getSelectOptionsFromDOM } from '@root/src/lib/utils/getSelectOptionsFromDOM';
+import {
+  LocalStorageKey,
+  getLocalStorageItem,
+} from '@root/src/lib/utils/localStorage';
+import {
+  BookingModel,
+  YesNo,
+  yesNoOptions,
+  genderOptions,
+  Gender,
+} from '@root/src/types';
 import dayjs from 'dayjs';
+import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import DateInput from '../DateInput';
 import SelectInput from '../SelectInput';
-import { trainStations, trainStationsOptions } from '@root/src/lib/constants';
+import SimpleInputContainer from '../SimpleInputContainer';
+import Button from '../core/ui/Button';
+import TextField from '../core/ui/TextField';
+import { TrainClass, trainClassOptions } from '@root/src/types/trainClass';
 
 const defaultValues = {
   departureDate: dayjs().add(1, 'day').unix(),
-  departureTime: dayjs().add(1, 'h').format('HH:mm'),
-  from: trainStations[0],
-  to: trainStations[1],
+  departureTime: dayjs().set('hour', 15).format('HH:mm'),
+  from: 'Yongsan',
+  to: 'Iksan',
+  trainType: '00',
+  trainClass: String(TrainClass.economy),
+
+  gender: String(Gender.Mr),
+  firstName: '',
+  lastName: '',
+  country: 'FR',
+  password: '',
+  email: '',
+  koreanCreditCard: String(YesNo.No),
 };
 
 interface Props {
@@ -25,18 +52,28 @@ export const BookingForm: React.FC<Props> = ({ onConfirm }) => {
     register,
     handleSubmit,
     watch,
-    getValues,
     setValue,
     control,
     formState: { errors },
   } = useForm({
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      ...(JSON.parse(
+        getLocalStorageItem(LocalStorageKey.FORM)
+      ) as BookingModel),
+      departureDate: defaultValues.departureDate,
+      departureTime: defaultValues.departureTime,
+    },
   });
 
   const controls = useBuildFormRegister(register, Object.keys(defaultValues));
 
+  const trainTypeOptions = useMemo(
+    () => getSelectOptionsFromDOM(selectors.trainOptions),
+    []
+  );
+
   const onSubmit = (_form: typeof defaultValues): BookingModel => {
-    console.log(_form);
     const hour = parseInt(_form.departureTime.split(':')[0]);
     const minute = parseInt(_form.departureTime.split(':')[1]);
     const date = dayjs
@@ -97,8 +134,115 @@ export const BookingForm: React.FC<Props> = ({ onConfirm }) => {
             required
           />
         </SimpleInputContainer>
+        <span className="basis-full" />
+        <SimpleInputContainer>
+          Type of train
+          <SelectInput
+            control={control}
+            name="trainType"
+            selected={watch('trainType')}
+            options={trainTypeOptions}
+            setValue={(value) => setValue('trainType', value as any)}
+            error={errors.trainType}
+            required
+          />
+        </SimpleInputContainer>
+        <SimpleInputContainer>
+          Seat type
+          <SelectInput
+            control={control}
+            name="trainClass"
+            selected={watch('trainClass')}
+            options={trainClassOptions}
+            setValue={(value) => setValue('trainClass', value as any)}
+            error={errors.trainClass}
+            required
+          />
+        </SimpleInputContainer>
+        <span className="basis-full h-[1px] bg-gray-300 mt-4" />
+        <SimpleInputContainer>
+          Gender
+          <SelectInput
+            control={control}
+            name="gender"
+            selected={watch('gender')}
+            options={genderOptions}
+            setValue={(value) => setValue('gender', value as any)}
+            error={errors.gender}
+            required
+          />
+        </SimpleInputContainer>
+        <TextField className="mt-4">
+          <TextField.Label>
+            First Name
+            <TextField.Input
+              {...controls.firstName}
+              placeholder="..."
+              required
+            />
+          </TextField.Label>
+        </TextField>
+        <TextField className="mt-4">
+          <TextField.Label>
+            Last Name
+            <TextField.Input
+              {...controls.lastName}
+              placeholder="..."
+              required
+            />
+          </TextField.Label>
+        </TextField>
+        <SimpleInputContainer>
+          Country
+          <SelectInput
+            control={control}
+            name="country"
+            selected={watch('country')}
+            options={countriesOptions}
+            setValue={(value) => setValue('country', value as any)}
+            error={errors.country}
+            required
+          />
+        </SimpleInputContainer>
+        <span className="basis-full" />
+        <TextField className="mt-4">
+          <TextField.Label>
+            Email
+            <TextField.Input
+              {...controls.email}
+              placeholder="..."
+              required
+              type="email"
+            />
+          </TextField.Label>
+        </TextField>
+        <TextField className="mt-4">
+          <TextField.Label>
+            Password (6 - 13 digit)
+            <TextField.Input
+              {...controls.password}
+              placeholder="..."
+              minLength={6}
+              maxLength={13}
+              allowedRegex={/^[0-9]*$/}
+              required
+            />
+          </TextField.Label>
+        </TextField>
+        <SimpleInputContainer>
+          Payment with Korean credit card
+          <SelectInput
+            control={control}
+            name="koreanCreditCard"
+            selected={watch('koreanCreditCard')}
+            options={yesNoOptions}
+            setValue={(value) => setValue('koreanCreditCard', value as any)}
+            error={errors.koreanCreditCard}
+            required
+          />
+        </SimpleInputContainer>
         <div className="basis-full flex justify-center">
-          <Button>Submit</Button>
+          <Button>Find my train</Button>
         </div>
       </div>
     </form>

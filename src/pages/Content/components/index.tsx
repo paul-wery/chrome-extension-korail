@@ -9,7 +9,7 @@ refreshOnUpdate('pages/content');
 const root = document.createElement('div');
 root.id = ROOT_ID;
 
-document.body.append(root);
+document.body?.append(root);
 
 const rootIntoShadow = document.createElement('div');
 rootIntoShadow.id = 'shadow-root';
@@ -25,4 +25,5 @@ shadowRoot.appendChild(rootIntoShadow);
  */
 attachTwindStyle(rootIntoShadow, shadowRoot);
 
+document.documentElement.style.visibility = 'hidden';
 createRoot(rootIntoShadow).render(<App />);
