@@ -1,0 +1,23 @@
+diff --git a/node_modules/react-tailwindcss-datepicker/dist/index.esm.js b/node_modules/react-tailwindcss-datepicker/dist/index.esm.js
+index d79ebd6..2828709 100644
+--- a/node_modules/react-tailwindcss-datepicker/dist/index.esm.js
++++ b/node_modules/react-tailwindcss-datepicker/dist/index.esm.js
+@@ -1808,11 +1808,14 @@ function useOnClickOutside(ref, handler) {
+             }
+             handler(event);
+         };
+-        document.addEventListener("mousedown", listener);
+-        document.addEventListener("touchstart", listener);
++
++        const shadowRoot = document.getElementById('chrome-extension-boilerplate-react-vite-content-view-root').shadowRoot;
++
++        shadowRoot.addEventListener("mousedown", listener);
++        shadowRoot.addEventListener("touchstart", listener);
+         return () => {
+-            document.removeEventListener("mousedown", listener);
+-            document.removeEventListener("touchstart", listener);
++            shadowRoot.removeEventListener("mousedown", listener);
++            shadowRoot.removeEventListener("touchstart", listener);
+         };
+     }, [ref, handler]);
+ }
