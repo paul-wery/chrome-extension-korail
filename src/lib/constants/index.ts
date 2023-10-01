@@ -1,3 +1,4 @@
+// Replace also in fix of react-tailwindcss-datepicker
 export const ROOT_ID =
   'chrome-extension-boilerplate-react-vite-content-view-root';
 

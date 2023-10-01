@@ -1,11 +1,7 @@
+import { getAllElement, selectors } from '@root/src/lib/utils/getElement';
 import { useCallback } from 'react';
 import Button from '../core/ui/Button';
 import { SimpleModal } from '../modals/SimpleModal';
-import {
-  getElement,
-  getAllElement,
-  selectors,
-} from '@root/src/lib/utils/getElement';
 
 interface Props {
   open: boolean;
@@ -28,7 +24,7 @@ export const RootView: React.FC<Props> = ({ open, setOpen }) => {
 
   return (
     <SimpleModal
-      title="Easy Train - Train booking"
+      title="Korea Easy Train - Train booking"
       open={open}
       setOpen={setOpen}
     >

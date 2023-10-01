@@ -1,36 +1,25 @@
-import React from "react";
-import logo from "@assets/img/logo.svg";
-import "@pages/popup/Popup.css";
-import useStorage from "@src/shared/hooks/useStorage";
-import exampleThemeStorage from "@src/shared/storages/exampleThemeStorage";
-import withSuspense from "@src/shared/hoc/withSuspense";
+import logo from '@assets/img/logo.svg';
+import '@pages/popup/Popup.css';
+import withSuspense from '@src/shared/hoc/withSuspense';
+import Button from '../content/components/core/ui/Button';
 
 const Popup = () => {
-  const theme = useStorage(exampleThemeStorage);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-lime-400">
-          Edit <code>src/pages/popup/Popup.tsx</code> and save to reload.
+    <div className="text-center bg-white p-8 text-black-700">
+      <header className="flex items-center justify-center flex-col gap-4">
+        <div>
+          <img src={logo} className="h-[30vmin]" alt="logo" />
+        </div>
+        <p className="text-black-700 text-base">
+          You can start booking your train tickets right away!
         </p>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          href="https://www.letskorail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React!
+          <Button>Start Booking!</Button>
         </a>
-        <button
-          style={{
-            color: theme === "light" ? "#fff" : "#000",
-          }}
-          onClick={exampleThemeStorage.toggle}
-        >
-          Toggle theme: [{theme}]
-        </button>
       </header>
     </div>
   );

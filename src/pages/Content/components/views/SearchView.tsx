@@ -12,7 +12,7 @@ export const SearchView: React.FC<Props> = ({ open, setOpen }) => {
   useLookForTrain();
   return (
     <SimpleModal
-      title="Easy Train - Train booking - Searching..."
+      title="Korea Easy Train - Train booking - Searching..."
       open={open}
       setOpen={setOpen}
       fullScreen

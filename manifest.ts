@@ -5,11 +5,11 @@ import packageJson from './package.json';
  */
 const manifest: chrome.runtime.ManifestV3 = {
   manifest_version: 3,
-  name: 'Easy Train',
+  name: 'Korea Easy Train',
   description: 'Train booking assistant',
   version: packageJson.version,
 
-  permissions: ['storage'],
+  // permissions: ['storage'],
   options_page: 'src/pages/options/index.html',
   background: {
     service_worker: 'src/pages/background/index.js',

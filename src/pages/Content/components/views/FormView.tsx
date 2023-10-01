@@ -18,7 +18,7 @@ export const FormView: React.FC<Props> = ({ open, setOpen }) => {
 
   return (
     <SimpleModal
-      title="Easy Train - Train booking"
+      title="Korea Easy Train - Train booking"
       open={open}
       setOpen={setOpen}
     >

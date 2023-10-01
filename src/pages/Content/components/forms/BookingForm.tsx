@@ -11,11 +11,12 @@ import {
 } from '@root/src/lib/utils/localStorage';
 import {
   BookingModel,
-  YesNo,
-  yesNoOptions,
-  genderOptions,
   Gender,
+  YesNo,
+  genderOptions,
+  yesNoOptions,
 } from '@root/src/types';
+import { TrainClass, trainClassOptions } from '@root/src/types/trainClass';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,7 +25,6 @@ import SelectInput from '../SelectInput';
 import SimpleInputContainer from '../SimpleInputContainer';
 import Button from '../core/ui/Button';
 import TextField from '../core/ui/TextField';
-import { TrainClass, trainClassOptions } from '@root/src/types/trainClass';
 
 const defaultValues = {
   departureDate: dayjs().add(1, 'day').unix(),

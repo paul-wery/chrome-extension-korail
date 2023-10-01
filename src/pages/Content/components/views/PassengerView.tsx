@@ -13,7 +13,7 @@ export const PassengerView: React.FC<Props> = ({ open, setOpen }) => {
   useFillPassengerInformation();
   return (
     <SimpleModal
-      title="Easy Train - Train booking - Filling..."
+      title="Korea Easy Train - Train booking - Filling..."
       open={open}
       setOpen={setOpen}
       fullScreen

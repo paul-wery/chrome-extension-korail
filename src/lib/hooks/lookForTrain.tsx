@@ -21,13 +21,21 @@ export function useLookForTrain() {
 
     const trainTable = getElement(selectors.trainTable);
     const rows = Array.from(trainTable.querySelectorAll('tr'))
+      .filter((row) => {
+        const cols = Array.from(row.querySelectorAll('td'));
+        const departureTime = cols[5].textContent?.trim();
+        const departureHour = parseInt(departureTime?.split(':')[0]!);
+        const departureMinute = parseInt(departureTime?.split(':')[1]!);
+
+        return !(hour > departureHour || minute > departureMinute);
+      })
       .map((row, index) => {
         const cols = Array.from(row.querySelectorAll('td'));
         // const departureTime = cols[5].textContent?.trim();
         // const departureHour = parseInt(departureTime?.split(':')[0]!);
         // const departureMinute = parseInt(departureTime?.split(':')[1]!);
         // TODO use when time range
-        // if (index > 0) return null; // TODO remove if time range
+        if (index > 0) return null; // TODO remove if time range
         return form.trainClass === TrainClass.first ? cols[7] : cols[8];
       })
       .filter(Boolean) as HTMLElement[];
